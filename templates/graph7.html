@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plotly Scatter Test</title>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<div id="myDiv"><!-- ここにグラフを表示する --></div>
+  <script>
+
+
+   var trace1 = {
+  x: {{timelists}},
+  y: {{cpilists}},
+  mode: 'lines+markers',
+  type: 'scatter'
+};
+
+var data = [trace1];
+
+var layout = {
+  hovermode:'closest',
+  autosize: false,
+  width:1500,
+  height:500
+};
+
+Plotly.newPlot('myDiv', data, layout);
+  </script>
+<p>cpi.index:{{timelists}}</p>
+<p>cpi:{{cpilists}}</p>
+</body>
+</html>

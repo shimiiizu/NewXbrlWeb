@@ -1,0 +1,28 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Topページ{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-light" style="background-color: #eee8aa;">
+    <div class="container">
+        <a href="/create" role="button"><font size="4">新規作成画面</font></a>
+        <a href="/logout" role="button"><font size="4">ログアウト</font></a></p>
+    </div>
+</nav>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+    <h1>Home!</h1>
+         <p>こちらはホーム画面です。</p>
+    </div>
+</div>
+{% endblock %}
+
+
