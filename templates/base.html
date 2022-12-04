@@ -1,26 +1,14 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}This is an example page{% endblock %}
-
-{% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <!-- ... -->
-</div>
-{% endblock %}
-
-{% block content %}
-  <h1>Hello, Bootstrap</h1>
-
-{% endblock %}
-
-{% block body %}
-    <p>ここは共通</p>
-    <a href= "/" > ホーム</a>
-    <a href= "/nikka" >株式投資の日課</a>
-    <a href= "/graph9" >graph9</a>
-    <a href= "/graph10" >graph10</a>
-
-{% endblock %}
-
-
-
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <p>ヘッダー</p>
+        </header>
+        {% block content %}{% endblock %}
+    </body>
+</html>
 
