@@ -5,10 +5,13 @@
     {% block head %}
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
+    <a href="/create" role="button"><font size="4">新規作成画面</font></a>
+    <a href="/logout" role="button"><font size="4">ログアウト</font></a></p>
 </head>
 <body>
 <h1>S+</h1>
 {% block content %}{% endblock %}
+<a href="/" role="button"><font size="4">ホーム</font></a>
 <a href="/graph" role="button"><font size="4">グラフ１</font></a>
 <a href="/graph3" role="button"><font size="4">グラフ3</font></a>
 <a href="/graph4" role="button"><font size="4">グラフ4</font></a>
