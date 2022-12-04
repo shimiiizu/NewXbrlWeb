@@ -1,20 +1,15 @@
-
 {% extends "base.html" %}
 {% block head %}
-
-<meta charset="UTF-8">
-    <title>Plotly Scatter Test2</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}
 
 {% block content %}
 
 <h1>Plotlyのテスト</h1>
+
 <div id="myDiv"><!-- ここにグラフを表示する --></div>
 
-    <script>
+<script>
     var trace1 = {
         x:[{% for item in cpi_timelists %}　
        '{{item}}',
@@ -24,20 +19,18 @@
        {{item}},
         {% endfor %}],
 
-
         type: 'scatter',
     };
 
     var data = [ trace1];
 
     var layout = {
-
-
          title:'Plotly テスト'
     };
 
     Plotly.newPlot('myDiv', data, layout);
-    </script>
+
+</script>
 <p>ようやくFredで取得した値を表示することに成功！</p>
 <p>pythonからJavascriptへの変数の受け渡しに苦労した。</p>
 
