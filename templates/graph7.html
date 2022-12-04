@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Plotly Scatter Test</title>
-      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
+
+{% block content %}
 <div id="myDiv"><!-- ここにグラフを表示する --></div>
-  <script>
+<script>
 
-
-   var trace1 = {
+  var trace1 = {
   x: {{timelists}},
   y: {{cpilists}},
   mode: 'lines+markers',
@@ -27,8 +25,8 @@ var layout = {
 };
 
 Plotly.newPlot('myDiv', data, layout);
-  </script>
+
+</script>
 <p>cpi.index:{{timelists}}</p>
 <p>cpi:{{cpilists}}</p>
-</body>
-</html>
+{% endblock %}

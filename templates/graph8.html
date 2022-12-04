@@ -1,17 +1,13 @@
 {% extends "base.html" %}
 
 {% block head %}
-
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}
-<head>
-    <meta charset="UTF-8">
-    <title>Plotly Scatter Test</title>
-      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
-<body>
+
 <div id="myDiv"><!-- ここにグラフを表示する --></div>
   <script>
 
+{% block content %}
 var data = [
   {
     <!--x:['1967-12-01 00:00:00', '1968-01-01 00:00:00', '1968-02-01 00:00:00'],-->
@@ -32,7 +28,6 @@ var data = [
        {{item}},
         {% endfor %}],
 
-
     type: 'scatter'
 
   }
@@ -42,5 +37,4 @@ Plotly.newPlot('myDiv', data);
   </script>
 <p>cpi.index:{{timelists}}</p>
 <p>cpi:{{cpilists}}</p>
-</body>
-</html>
+{% endblock %}
