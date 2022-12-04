@@ -5,6 +5,7 @@ import fredapi as fa
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
+#
 
 # FRED
 fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
