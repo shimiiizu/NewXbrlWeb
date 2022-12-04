@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <meta charset="UTF-8" />
-    <title>bar chart</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1"></script>
     <script>
       window.onload = function () {
@@ -37,7 +35,7 @@
     </script>
 {% endblock %}
 
-{% block body %}
+{% block content %}
 <h1>Graph5 散布図の表示</h1>
     <canvas id="japanese_people_chart" width="500" height="500"></canvas>
 

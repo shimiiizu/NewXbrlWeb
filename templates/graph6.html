@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
+{% extends 'base.html' %}
 
-<body>
-  <img src="img/ex1.png">
-  <div id="myDiv"><!-- ここにグラフを表示する --></div>
-  <script>
+{% block head %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<img src="img/ex1.png">
+<div id="myDiv"><!-- ここにグラフを表示する --></div>
+<script>
     var data = [{
       values: [19, 26, 55],
       labels: ['Residential', 'Non-Residential', 'Utility'],
@@ -20,5 +20,5 @@
     };
 
     Plotly.newPlot('myDiv', data, layout);
-  </script>
-</body></html>
+</script>
+{% endblock %}

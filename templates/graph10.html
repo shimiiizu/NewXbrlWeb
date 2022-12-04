@@ -1,11 +1,11 @@
 {% extends "base.html" %}
+
 {% block head %}
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}
 
 {% block content %}
-
-<h1>Plotlyのテスト</h1>
+<h1>Plotlyのグラフ</h1>
 
 <div id="myDiv"><!-- ここにグラフを表示する --></div>
 
@@ -25,7 +25,7 @@
     var data = [ trace1];
 
     var layout = {
-         title:'Plotly テスト'
+         title:'CPI'
     };
 
     Plotly.newPlot('myDiv', data, layout);
@@ -33,7 +33,6 @@
 </script>
 <p>ようやくFredで取得した値を表示することに成功！</p>
 <p>pythonからJavascriptへの変数の受け渡しに苦労した。</p>
-
 {% endblock %}
 
 
