@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block head %}
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}
 
-<div id="myDiv"><!-- ここにグラフを表示する --></div>
-  <script>
-
 {% block content %}
+
+<div id="myDiv"><!-- ここにグラフを表示する --></div>
+<script>
+
 var data = [
   {
     <!--x:['1967-12-01 00:00:00', '1968-01-01 00:00:00', '1968-02-01 00:00:00'],-->
@@ -34,7 +35,9 @@ var data = [
 ];
 
 Plotly.newPlot('myDiv', data);
-  </script>
+
+</script>
 <p>cpi.index:{{timelists}}</p>
 <p>cpi:{{cpilists}}</p>
+
 {% endblock %}

@@ -1,8 +1,11 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
+
 {% block head %}
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}
+
 {% block content %}
+
 <div id="myDiv"><!-- ここにグラフを表示する --></div>
 
 <script>
@@ -15,14 +18,12 @@
        {{item}},
         {% endfor %}],
 
-
         type: 'scatter',
     };
 
     var data = [ trace1];
 
     var layout = {
-
 
          title:'Plotly テスト'
     };
@@ -32,6 +33,5 @@
 </script>
 <p>ようやくFredで取得した値を表示することに成功！</p>
 <p>pythonからJavascriptへの変数の受け渡しに苦労した。</p>
-
 
 {% endblock %}
