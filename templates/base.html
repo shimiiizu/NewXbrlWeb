@@ -13,44 +13,32 @@
 </head>
 <body>
     <div class="container">
-    <h1>S+</h1>
+    <h1>XBRL DB</h1>
     {% block content %}{% endblock %}
-        <nav class="navbar navbar-expand-md navbar-dark p-3">
-            <div class="collapse navbar-collapse justify-content-between">
-            <ul class="navbar-nav">
-                <li>
-                    <a href="/" role="button"><font size="4">ホーム</font></a>
-                </li>
-                <li>
-                    <a href="/graph" role="button"><font size="4">グラフ１</font></a>
-                </li>
-                <li>
-                    <a href="/graph3" role="button"><font size="4">グラフ3</font></a>
-                </li>
-                <li>
-                    <a href="/graph4" role="button"><font size="4">グラフ4</font></a>
-                </li>
-                <li>
-                    <a href="/graph5" role="button"><font size="4">グラフ5</font></a>
-                </li>
-                <li>
-                    <a href="/graph6" role="button"><font size="4">グラフ6</font></a>
-                </li>
-                <li>
-                    <a href="/graph7" role="button"><font size="4">グラフ7</font></a>
-                </li>
-                <li>
-                    <a href="/graph8" role="button"><font size="4">グラフ8</font></a>
-                </li>
-                <li>
-                    <a href="/graph9" role="button"><font size="4">グラフ9</font></a>
-                </li>
-                <li>
-                    <a href="/graph10" role="button"><font size="4">グラフ11</font></a>
-                </li>
-            </ul>
-            </div>
-        </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/graph">graph1</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/graph2">graph2</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/graph3">graph3</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/graph4">graph4</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     </div>
 </body>
 </html>
