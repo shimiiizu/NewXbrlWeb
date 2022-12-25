@@ -1,49 +1,57 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <title>{%block title %}{% endblock %}</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <title>S+</title>
-    {% block head %}
-    {% endblock %}
-    <a href="/create" role="button"><font size="4">新規作成画面</font></a>
-    <a href="/logout" role="button"><font size="4">ログアウト</font></a></p>
+    <meta name="viewport" content="width=device-width, initaial-scale=1.0, shrink-to-fit=no" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
-<h1>S+</h1>
-{% block content %}{% endblock %}
-<ul>
-    <li>
-        <a href="/" role="button"><font size="4">ホーム</font></a>
-    </li>
-    <li>
-        <a href="/graph" role="button"><font size="4">グラフ１</font></a>
-    </li>
-    <li>
-        <a href="/graph3" role="button"><font size="4">グラフ3</font></a>
-    </li>
-    <li>
-        <a href="/graph4" role="button"><font size="4">グラフ4</font></a>
-    </li>
-    <li>
-        <a href="/graph5" role="button"><font size="4">グラフ5</font></a>
-    </li>
-    <li>
-        <a href="/graph6" role="button"><font size="4">グラフ6</font></a>
-    </li>
-    <li>
-        <a href="/graph7" role="button"><font size="4">グラフ7</font></a>
-    </li>
-    <li>
-        <a href="/graph8" role="button"><font size="4">グラフ8</font></a>
-    </li>
-    <li>
-        <a href="/graph9" role="button"><font size="4">グラフ9</font></a>
-    </li>
-    <li>
-        <a href="/graph10" role="button"><font size="4">グラフ10</font></a>
-    </li>
-</ul>
+    <div class="container">
+    <h1>S+</h1>
+    {% block content %}{% endblock %}
+        <nav class="navbar navbar-expand-md navbar-dark p-3">
+            <div class="collapse navbar-collapse justify-content-between">
+            <ul class="navbar-nav">
+                <li>
+                    <a href="/" role="button"><font size="4">ホーム</font></a>
+                </li>
+                <li>
+                    <a href="/graph" role="button"><font size="4">グラフ１</font></a>
+                </li>
+                <li>
+                    <a href="/graph3" role="button"><font size="4">グラフ3</font></a>
+                </li>
+                <li>
+                    <a href="/graph4" role="button"><font size="4">グラフ4</font></a>
+                </li>
+                <li>
+                    <a href="/graph5" role="button"><font size="4">グラフ5</font></a>
+                </li>
+                <li>
+                    <a href="/graph6" role="button"><font size="4">グラフ6</font></a>
+                </li>
+                <li>
+                    <a href="/graph7" role="button"><font size="4">グラフ7</font></a>
+                </li>
+                <li>
+                    <a href="/graph8" role="button"><font size="4">グラフ8</font></a>
+                </li>
+                <li>
+                    <a href="/graph9" role="button"><font size="4">グラフ9</font></a>
+                </li>
+                <li>
+                    <a href="/graph10" role="button"><font size="4">グラフ11</font></a>
+                </li>
+            </ul>
+            </div>
+        </nav>
+    </div>
 </body>
 </html>
 
