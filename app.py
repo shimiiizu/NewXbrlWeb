@@ -91,6 +91,9 @@ def graph9():
     cpilists = cpi.to_list()
     return render_template('fredapi.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
 
+@app.route('/stockpricechart')
+def stockpricechart():
+    return render_template('stockpricechart.html')
 
 @app.route('/graph10')
 def graph10():

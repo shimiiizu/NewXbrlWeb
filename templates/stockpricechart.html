@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>XBRL DB</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+<div class="container mt-5">
+  <h1 class="display-4">株価表示サービス</h1>
+        <p class="lead">YahooAPIを使って株価チャートを表示するサービス</p>
+        <hr class="my-4">
+        <p>無料で提供します</p>
+
+    <form class="row g-3">
+        <div class="col-auto">
+            <label class="visually-hidden">株価コード</label>
+        </div>
+        <div class="col-auto">
+            <input type="password" class="form-control" id="inputPassword2" placeholder="株価コードをここに入力">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">実行</button>
+        </div>
+    </form>
+
+
+<div id="myDiv"><!-- ここにグラフを表示する --></div>
+
+<script>
+    var trace1 = {
+        x:[{% for item in cpi_timelists %}　
+       '{{item}}',
+        {% endfor %}],
+
+        y:[{% for item in cpilists %}　
+       {{item}},
+        {% endfor %}],
+
+        type: 'scatter',
+    };
+
+    var data = [ trace1];
+
+    var layout = {
+
+    };
+
+    Plotly.newPlot('myDiv', data, layout);
+
+</script>
+<p>ようやくFredで取得した値を表示することに成功！</p>
+<p>pythonからJavascriptへの変数の受け渡しに苦労した。</p>
+
+
+</div>
+</body>>
