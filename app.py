@@ -4,6 +4,8 @@ from flask_bootstrap import Bootstrap
 import fredapi as fa
 from yahoo_finance_api2 import share
 from yahoo_finance_api2.exceptions import YahooFinanceError
+from datetime import date, datetime
+import pandas as pd
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -24,6 +26,9 @@ symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
                                       3,
                                       share.FREQUENCY_TYPE_DAY,
                                       1)
+df = pd.DataFrame({'Date': [datetime.fromtimestamp(d / 1000) for d in symbol_data['timestamp']],\
+            'Open' : symbol_data['open'], 'High' : symbol_data['high'], 'Low' : symbol_data['low'],\
+            'Close' : symbol_data['close'], 'Volume' : symbol_data['volume']}).set_index('Date')
 
 """
 # 何に使っているか不明
