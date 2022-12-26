@@ -25,14 +25,15 @@ symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
                                       share.FREQUENCY_TYPE_DAY,
                                       1)
 
-
+"""
+# 何に使っているか不明
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30), nullable=False)
     detail = db.Column(db.String(100))
     due = db.Column(db.DateTime, nullable=False)
 
-
+"""
 @app.route('/')
 def index():
     return render_template('index.html')
