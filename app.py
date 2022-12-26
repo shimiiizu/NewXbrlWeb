@@ -2,17 +2,6 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import fredapi as fa
-import pandas as pd
-import matplotlib.pyplot as plt
-import datetime
-
-#
-
-# FRED
-fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
-
-# データの取得
-cpi = fred.get_series('CORESTICKM159SFRBATL')
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -20,6 +9,10 @@ db = SQLAlchemy(app)
 
 # Flaskアプリ(app)とflask-bootstrapのインスタンスを紐付け
 bootstrap = Bootstrap(app)
+
+# FRED API
+fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
+cpi = fred.get_series('CORESTICKM159SFRBATL')
 
 
 class Post(db.Model):
@@ -32,6 +25,18 @@ class Post(db.Model):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/fredapi')
+def graph9():
+    cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
+    cpilists = cpi.to_list()
+    return render_template('fredapi.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
+
+
+@app.route('/stockpricechart')
+def stockpricechart():
+    return render_template('stockpricechart.html')
 
 
 @app.route('/graph')
@@ -85,15 +90,8 @@ def graph8():
     return render_template('graph8.html', xlists=xlists, ylists=ylists, timelists=timelists, cpilists=cpilists)
 
 
-@app.route('/fredapi')
-def graph9():
-    cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
-    cpilists = cpi.to_list()
-    return render_template('fredapi.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
 
-@app.route('/stockpricechart')
-def stockpricechart():
-    return render_template('stockpricechart.html')
+
 
 @app.route('/graph10')
 def graph10():
