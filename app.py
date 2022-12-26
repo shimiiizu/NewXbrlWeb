@@ -85,11 +85,11 @@ def graph8():
     return render_template('graph8.html', xlists=xlists, ylists=ylists, timelists=timelists, cpilists=cpilists)
 
 
-@app.route('/graph9')
+@app.route('/fredapi')
 def graph9():
     cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
     cpilists = cpi.to_list()
-    return render_template('graph9.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
+    return render_template('fredapi.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
 
 
 @app.route('/graph10')
