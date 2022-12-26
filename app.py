@@ -14,21 +14,8 @@ db = SQLAlchemy(app)
 # Flaskアプリ(app)とflask-bootstrapのインスタンスを紐付け
 bootstrap = Bootstrap(app)
 
-# FRED API
-fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
-cpi = fred.get_series('CORESTICKM159SFRBATL')
 
-# Yahoo API
-code = "1301"  # (株)極洋の東証コード
-my_share = share.Share(code + ".T")  # データ取得用のクラス
-symbol_data = None  # 株価のデータ
-symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
-                                      3,
-                                      share.FREQUENCY_TYPE_DAY,
-                                      1)
-df = pd.DataFrame({'Date': [datetime.fromtimestamp(d / 1000) for d in symbol_data['timestamp']],\
-            'Open' : symbol_data['open'], 'High' : symbol_data['high'], 'Low' : symbol_data['low'],\
-            'Close' : symbol_data['close'], 'Volume' : symbol_data['volume']}).set_index('Date')
+
 
 """
 # 何に使っているか不明
@@ -46,6 +33,8 @@ def index():
 
 @app.route('/fredapi')
 def fredapi():
+    fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
+    cpi = fred.get_series('CORESTICKM159SFRBATL')
     cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
     cpilists = cpi.to_list()
     return render_template('fredapi.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
@@ -53,7 +42,19 @@ def fredapi():
 
 @app.route('/stockpricechart')
 def stockpricechart():
-    return render_template('stockpricechart.html')
+    # Yahoo API
+    code = "1301"  # (株)極洋の東証コード
+    my_share = share.Share(code + ".T")  # データ取得用のクラス
+    symbol_data = None  # 株価のデータ
+    symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
+                                          3,
+                                          share.FREQUENCY_TYPE_DAY,
+                                          1)
+    df = pd.DataFrame({'Date': [datetime.fromtimestamp(d / 1000) for d in symbol_data['timestamp']], \
+                       'Open': symbol_data['open'], 'High': symbol_data['high'], 'Low': symbol_data['low'], \
+                       'Close': symbol_data['close'], 'Volume': symbol_data['volume']}).set_index('Date')
+
+    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list())
 
 
 @app.route('/graph')
