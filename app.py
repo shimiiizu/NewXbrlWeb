@@ -2,6 +2,8 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import fredapi as fa
+from yahoo_finance_api2 import share
+from yahoo_finance_api2.exceptions import YahooFinanceError
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -13,6 +15,15 @@ bootstrap = Bootstrap(app)
 # FRED API
 fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
 cpi = fred.get_series('CORESTICKM159SFRBATL')
+
+# Yahoo API
+code = "1301"  # (株)極洋の東証コード
+my_share = share.Share(code + ".T")  # データ取得用のクラス
+symbol_data = None  # 株価のデータ
+symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
+                                      3,
+                                      share.FREQUENCY_TYPE_DAY,
+                                      1)
 
 
 class Post(db.Model):
@@ -28,7 +39,7 @@ def index():
 
 
 @app.route('/fredapi')
-def graph9():
+def fredapi():
     cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
     cpilists = cpi.to_list()
     return render_template('fredapi.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
