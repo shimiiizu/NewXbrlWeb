@@ -38,8 +38,9 @@ def fredapi():
     cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
     cpilists = cpi.to_list()
     if request.method == 'POST':
-        screen_name = request.form['screen_name']
-    return render_template('fredapi.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
+        select = request.form['selects']
+        if select == 'cpi':
+            return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
 
 
 @app.route('/stockpricechart')
