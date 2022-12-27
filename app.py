@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import fredapi as fa
@@ -37,6 +37,8 @@ def fredapi():
     cpi = fred.get_series('CORESTICKM159SFRBATL')
     cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
     cpilists = cpi.to_list()
+    if request.method == 'POST':
+        screen_name = request.form['screen_name']
     return render_template('fredapi.html', cpi_timelists=cpi_timelists, cpilists=cpilists)
 
 
