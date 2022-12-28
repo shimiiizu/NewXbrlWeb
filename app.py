@@ -39,9 +39,10 @@ def fredapi():
     cpilists = cpi.to_list()
     if request.method == 'POST':
         select = request.form['selects']
-        if select == 'cpi':
+        if select == "cpi":
+            print('cpiが選択された')
             return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
-
+    return render_template('fredapi_form.html')
 
 @app.route('/stockpricechart')
 def stockpricechart():
