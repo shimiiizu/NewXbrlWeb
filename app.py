@@ -14,9 +14,6 @@ db = SQLAlchemy(app)
 # Flaskアプリ(app)とflask-bootstrapのインスタンスを紐付け
 bootstrap = Bootstrap(app)
 
-
-
-
 """
 # 何に使っているか不明
 class Post(db.Model):
@@ -26,6 +23,8 @@ class Post(db.Model):
     due = db.Column(db.DateTime, nullable=False)
 
 """
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -44,17 +43,17 @@ def fredapi():
             return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
     return render_template('fredapi_form.html')
 
+
 @app.route('/stockpricechart', methods=['GET'])
 def get():
-    return render_template('stockpricechart.html',title="testpost")
+    return render_template('stockpricechart.html', message="銘柄コードを入力してください。")
 
 
-#@app.route('/stockpricechart')
+# @app.route('/stockpricechart')
 @app.route('/stockpricechart', methods=['POST'])
 def post():
-
-    name =request.form.get("name")
-    #print(name)
+    name = request.form.get("name")
+    # print(name)
 
     # Yahoo API
     code = "1301"  # (株)極洋の東証コード
@@ -64,12 +63,11 @@ def post():
                                           3,
                                           share.FREQUENCY_TYPE_DAY,
                                           1)
-    df = pd.DataFrame({'Date': [datetime.fromtimestamp(d / 1000) for d in symbol_data['timestamp']], \
-                       'Open': symbol_data['open'], 'High': symbol_data['high'], 'Low': symbol_data['low'], \
+    df = pd.DataFrame({'Date': [datetime.fromtimestamp(d / 1000) for d in symbol_data['timestamp']],
+                       'Open': symbol_data['open'], 'High': symbol_data['high'], 'Low': symbol_data['low'],
                        'Close': symbol_data['close'], 'Volume': symbol_data['volume']}).set_index('Date')
 
     return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), title="testtitle")
-
 
 
 @app.route('/graph')
@@ -121,9 +119,6 @@ def graph8():
     xlists = [1, 2, 3]
     ylists = [10, 20, 30]
     return render_template('graph8.html', xlists=xlists, ylists=ylists, timelists=timelists, cpilists=cpilists)
-
-
-
 
 
 @app.route('/graph10')
