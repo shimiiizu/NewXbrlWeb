@@ -55,10 +55,20 @@ def fred_get():
 @app.route('/fredapi', methods=['POST'])
 def fred_post():
     fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
-    cpi = fred.get_series('CORESTICKM159SFRBATL')
-    cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
-    cpilists = cpi.to_list()
-    return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
+
+    name = request.form.get("name")
+    print(name)
+    if name == 'cpi':
+        print('cpi!!')
+        api = fred.get_series('CORESTICKM159SFRBATL')
+        timelists = api.index.strftime('%Y-%m-%d').to_list()
+        lists = api.to_list()
+        return render_template('fredapi.html', timelists=timelists, lists=lists)
+
+    elif name == 'interest_rate':
+        api = fred.get_series('DEF')
+
+
 
 
 @app.route('/stockpricechart', methods=['GET'])
