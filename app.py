@@ -44,8 +44,18 @@ def fredapi():
             return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
     return render_template('fredapi_form.html')
 
-@app.route('/stockpricechart')
-def stockpricechart():
+@app.route('/stockpricechart', methods=['GET'])
+def get():
+    return render_template('stockpricechart.html',title="testpost")
+
+
+#@app.route('/stockpricechart')
+@app.route('/stockpricechart', methods=['POST'])
+def post():
+
+    name =request.form.get("name")
+    #print(name)
+
     # Yahoo API
     code = "1301"  # (株)極洋の東証コード
     my_share = share.Share(code + ".T")  # データ取得用のクラス
@@ -58,7 +68,8 @@ def stockpricechart():
                        'Open': symbol_data['open'], 'High': symbol_data['high'], 'Low': symbol_data['low'], \
                        'Close': symbol_data['close'], 'Volume': symbol_data['volume']}).set_index('Date')
 
-    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list())
+    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), title="testtitle")
+
 
 
 @app.route('/graph')
