@@ -23,11 +23,14 @@ class Post(db.Model):
     due = db.Column(db.DateTime, nullable=False)
 
 """
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
+"""
 @app.route('/fredapi')
 def fredapi():
     fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
@@ -40,6 +43,22 @@ def fredapi():
             print('cpiが選択された')
             return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
     return render_template('fredapi.html')
+
+"""
+
+
+@app.route('/fredapi', methods=['GET'])
+def fred_get():
+    return render_template('fredapi.html')
+
+
+@app.route('/fredapi', methods=['POST'])
+def fred_post():
+    fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
+    cpi = fred.get_series('CORESTICKM159SFRBATL')
+    cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
+    cpilists = cpi.to_list()
+    return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
 
 
 @app.route('/stockpricechart', methods=['GET'])
