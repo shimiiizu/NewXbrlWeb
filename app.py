@@ -67,6 +67,11 @@ def post():
 
     return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), message="")
 
+# -----------------業績表示サービス-----------------
+@app.route('/pl', methods=['GET'])
+def pl_get():
+    return render_template('pl.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
