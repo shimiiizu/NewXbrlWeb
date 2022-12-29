@@ -16,15 +16,18 @@
         <hr class="my-4">
         <p>無料で提供します</p>
 
-    <div class="form-group">
-        <label for="select">経済指標を選んでください</label>
+     <form action="stockpricechart" method="post" enctype="multipart/form-data" class="row g-3">
+        <div class="col-auto">
         <select name="selects" class="form-control">
             <option value="cpi">インフレ率</option>
             <option>金利</option>
             <option>GDP</option>
         </select>
-    </div>
-
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">グラフ表示</button>
+        </div>
+    </form>
 
     <ul class="nav nav-tabs">
         <li class="nav-item">

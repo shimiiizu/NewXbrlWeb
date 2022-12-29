@@ -23,8 +23,6 @@ class Post(db.Model):
     due = db.Column(db.DateTime, nullable=False)
 
 """
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -41,7 +39,7 @@ def fredapi():
         if select == "cpi":
             print('cpiが選択された')
             return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
-    return render_template('fredapi_form.html')
+    return render_template('fredapi.html')
 
 
 @app.route('/stockpricechart', methods=['GET'])
