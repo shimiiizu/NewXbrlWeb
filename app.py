@@ -51,13 +51,7 @@ def get():
 
 @app.route('/stockpricechart', methods=['POST'])
 def post():
-    #name = request.form.get("name")
-    # print(name)
-
-    # Yahoo API
-
-    code = request.form.get("name") #
-    print(code)
+    code = request.form.get("name")  # formから銘柄コードを取得
     my_share = share.Share(code + ".T")  # データ取得用のクラス
     symbol_data = None  # 株価のデータ
     symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
@@ -68,7 +62,7 @@ def post():
                        'Open': symbol_data['open'], 'High': symbol_data['high'], 'Low': symbol_data['low'],
                        'Close': symbol_data['close'], 'Volume': symbol_data['volume']}).set_index('Date')
 
-    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), title="testtitle")
+    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), message="")
 
 
 @app.route('/graph')
