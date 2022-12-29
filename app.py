@@ -78,13 +78,13 @@ def post():
                        'Open': symbol_data['open'], 'High': symbol_data['high'], 'Low': symbol_data['low'],
                        'Close': symbol_data['close'], 'Volume': symbol_data['volume']}).set_index('Date')
 
-    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), message="")
+    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), message="銘柄コード："+str(code))
 
 
 # -----------------業績表示サービス-----------------
 @app.route('/pl', methods=['GET'])
 def pl_get():
-    return render_template('pl.html')
+    return render_template('pl.html',  message="銘柄コードを入力してください。")
 
 
 @app.route('/pl', methods=['POST'])
@@ -98,7 +98,7 @@ def pl_post():
     print(df_select['Announcement_date'])
     print(df_select['Sales'])
     return render_template('pl.html', x=df_select['Announcement_date'].values.tolist()
-                           , y=df_select['Sales'].values.tolist())
+                           , y=df_select['Sales'].values.tolist(), message="銘柄コード："+str(code))
 
 
 if __name__ == "__main__":
