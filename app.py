@@ -6,19 +6,30 @@ from yahoo_finance_api2 import share
 from yahoo_finance_api2.exceptions import YahooFinanceError
 from datetime import date, datetime
 import pandas as pd
+import sqlite3
 
 app = Flask(__name__)
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
-#db = SQLAlchemy(app)
+# DBの指定
+DB = 'D:/XBRLDB/XBRL_DB_v02.db'
+
+# sqlの指定
+sql = 'SELECT * FROM XbrlDB'
+
+# ダウンロード済のXbrlファイルのリストを作成
+conn = sqlite3.connect(DB)
+cur = conn.cursor()
+df = pd.read_sql(sql, conn)
 
 # Flaskアプリ(app)とflask-bootstrapのインスタンスを紐付け
 bootstrap = Bootstrap(app)
+
 
 # ----------------------Home------------------------
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 # --------------経済指標表示サービス-----------------
 @app.route('/fredapi', methods=['GET'])
@@ -45,7 +56,8 @@ def fred_post():
 
     timelists = api.index.strftime('%Y-%m-%d').to_list()
     lists = api.to_list()
-    return render_template('fredapi.html', timelists=timelists, lists=lists, message="データの数は"+str(len(lists))+'です。')
+    return render_template('fredapi.html', timelists=timelists, lists=lists, message="データの数は" + str(len(lists)) + 'です。')
+
 
 # -----------------株価表示サービス-----------------
 @app.route('/stockpricechart', methods=['GET'])
@@ -68,6 +80,7 @@ def post():
 
     return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), message="")
 
+
 # -----------------業績表示サービス-----------------
 @app.route('/pl', methods=['GET'])
 def pl_get():
@@ -76,7 +89,16 @@ def pl_get():
 
 @app.route('/pl', methods=['POST'])
 def pl_post():
-    return render_template('pl.html')
+    # formから銘柄コードを取得
+    code = request.form.get("name")
+    print(code)
+    print(df)
+    # codeで抽出
+    df_select = df[df['Code'] == int(code)].sort_values('Announcement_date')
+    print(df_select['Announcement_date'])
+    print(df_select['Sales'])
+    return render_template('pl.html', x=df_select['Announcement_date'].values.tolist()
+                           , y=df_select['Sales'].values.tolist())
 
 
 if __name__ == "__main__":
