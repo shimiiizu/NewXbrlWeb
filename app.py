@@ -14,37 +14,10 @@ db = SQLAlchemy(app)
 # Flaskアプリ(app)とflask-bootstrapのインスタンスを紐付け
 bootstrap = Bootstrap(app)
 
-"""
-# 何に使っているか不明
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(30), nullable=False)
-    detail = db.Column(db.String(100))
-    due = db.Column(db.DateTime, nullable=False)
-
-"""
-
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
-"""
-@app.route('/fredapi')
-def fredapi():
-    fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
-    cpi = fred.get_series('CORESTICKM159SFRBATL')
-    cpi_timelists = cpi.index.strftime('%Y-%m-%d').to_list()
-    cpilists = cpi.to_list()
-    if request.method == 'POST':
-        select = request.form['selects']
-        if select == "cpi":
-            print('cpiが選択された')
-            return render_template('fredapi.html', timelists=cpi_timelists, lists=cpilists)
-    return render_template('fredapi.html')
-
-"""
 
 
 @app.route('/fredapi', methods=['GET'])
@@ -55,9 +28,9 @@ def fred_get():
 @app.route('/fredapi', methods=['POST'])
 def fred_post():
     fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
-
     name = request.form.get("name")
     print(name)
+
     if name == 'cpi':
         print('cpi!!')
         api = fred.get_series('CORESTICKM159SFRBATL')
@@ -66,8 +39,13 @@ def fred_post():
         print('GDP!!')
         api = fred.get_series('GDP')
 
+    elif name == 'interest_rate':
+        print('interest_rate!!')
+        api = fred.get_series('DEF')
 
-
+    elif name == 'nikkei':
+        print('nikkei!!')
+        api = fred.get_series('NIKKEI225')
 
     print(name)
     timelists = api.index.strftime('%Y-%m-%d').to_list()
