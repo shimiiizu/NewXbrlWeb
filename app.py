@@ -49,14 +49,15 @@ def get():
     return render_template('stockpricechart.html', message="銘柄コードを入力してください。")
 
 
-# @app.route('/stockpricechart')
 @app.route('/stockpricechart', methods=['POST'])
 def post():
-    name = request.form.get("name")
+    #name = request.form.get("name")
     # print(name)
 
     # Yahoo API
-    code = "1301"  # (株)極洋の東証コード
+
+    code = request.form.get("name") #
+    print(code)
     my_share = share.Share(code + ".T")  # データ取得用のクラス
     symbol_data = None  # 株価のデータ
     symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
