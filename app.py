@@ -61,14 +61,20 @@ def fred_post():
     if name == 'cpi':
         print('cpi!!')
         api = fred.get_series('CORESTICKM159SFRBATL')
-        timelists = api.index.strftime('%Y-%m-%d').to_list()
-        lists = api.to_list()
-        return render_template('fredapi.html', timelists=timelists, lists=lists)
 
-    elif name == 'interest_rate':
-        api = fred.get_series('DEF')
+    elif name == 'GDP':
+        print('GDP!!')
+        api = fred.get_series('GDP')
 
 
+
+
+    print(name)
+    timelists = api.index.strftime('%Y-%m-%d').to_list()
+    lists = api.to_list()
+    print(len(timelists))
+    print(len(lists))
+    return render_template('fredapi.html', timelists=timelists, lists=lists)
 
 
 @app.route('/stockpricechart', methods=['GET'])
@@ -79,8 +85,8 @@ def get():
 @app.route('/stockpricechart', methods=['POST'])
 def post():
     code = request.form.get("name")  # formから銘柄コードを取得
-    my_share = share.Share(code + ".T")  # データ取得用のクラス
-    symbol_data = None  # 株価のデータ
+    my_share = share.Share(code + ".T")
+    symbol_data = None
     symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
                                           3,
                                           share.FREQUENCY_TYPE_DAY,
