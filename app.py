@@ -8,8 +8,9 @@ from datetime import date, datetime
 import pandas as pd
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
-db = SQLAlchemy(app)
+
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
+#db = SQLAlchemy(app)
 
 # Flaskアプリ(app)とflask-bootstrapのインスタンスを紐付け
 bootstrap = Bootstrap(app)
@@ -70,6 +71,11 @@ def post():
 # -----------------業績表示サービス-----------------
 @app.route('/pl', methods=['GET'])
 def pl_get():
+    return render_template('pl.html')
+
+
+@app.route('/pl', methods=['POST'])
+def pl_post():
     return render_template('pl.html')
 
 
