@@ -16,13 +16,13 @@
   <h1 class="display-4">株価表示サービス</h1>
         <p class="lead">YahooAPIを使って株価チャートを表示するサービス</p>
         <hr class="my-4">
-        <p>{{ message }}</p>
+        <h3>{{ message }}</h3>
     <form action="stockpricechart" method="post" enctype="multipart/form-data" class="row g-3">
         <div class="col-auto">
-            <label class="visually-hidden">株価コード</label>
+            <label class="visually-hidden">銘柄コード</label>
         </div>
         <div class="col-auto">
-            <input type="text" class="form-control" name="name" placeholder="株価コードをここに入力">
+            <input type="text" class="form-control" name="name" placeholder="ここに入力">
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">グラフ表示</button>
@@ -64,6 +64,7 @@
 </script>
 <p>yahoo apiを使って株価を表示するところまで成功！</p>
 <p>基本構造はFREDと同じなので以外とあっさり成功</p>
+    <p>plotlyを現状javascriptとして利用しているものの、pythonで完結することができると思われるので、今後変更を加える予定。</p>
 
 
 </div>
