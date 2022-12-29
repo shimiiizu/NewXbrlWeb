@@ -29,30 +29,22 @@ def fred_get():
 def fred_post():
     fred = fa.Fred(api_key='6d0c0a6b221e21f5c00fcfd9cc04477f')
     name = request.form.get("name")
-    print(name)
 
     if name == 'cpi':
-        print('cpi!!')
         api = fred.get_series('CORESTICKM159SFRBATL')
 
     elif name == 'GDP':
-        print('GDP!!')
         api = fred.get_series('GDP')
 
     elif name == 'interest_rate':
-        print('interest_rate!!')
         api = fred.get_series('DEF')
 
     elif name == 'nikkei':
-        print('nikkei!!')
         api = fred.get_series('NIKKEI225')
 
-    print(name)
     timelists = api.index.strftime('%Y-%m-%d').to_list()
     lists = api.to_list()
-    print(len(timelists))
-    print(len(lists))
-    return render_template('fredapi.html', timelists=timelists, lists=lists)
+    return render_template('fredapi.html', timelists=timelists, lists=lists, message="データの数は"+str(len(lists))+'です。')
 
 # -----------------株価表示サービス-----------------
 @app.route('/stockpricechart', methods=['GET'])
