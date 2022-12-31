@@ -6,6 +6,8 @@ from yahoo_finance_api2 import share
 from yahoo_finance_api2.exceptions import YahooFinanceError
 from datetime import date, datetime
 import pandas as pd
+#import plotly.graph_objects as go
+import PLGetter as pl
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -14,10 +16,19 @@ db = SQLAlchemy(app)
 # Flaskアプリ(app)とflask-bootstrapのインスタンスを紐付け
 bootstrap = Bootstrap(app)
 
+
+
 # ----------------------Home------------------------
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# --------------業績表示サービス-----------------
+@app.route('/pl', methods=['GET'])
+def pl_get():
+    x = pl.PLGetter(3679)[0]
+    y = pl.PLGetter(3679)[1]
+    return render_template('pl.html')
 
 # --------------経済指標表示サービス-----------------
 @app.route('/fredapi', methods=['GET'])
