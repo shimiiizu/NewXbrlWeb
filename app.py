@@ -99,6 +99,7 @@ def pl_post():
     # formから銘柄コードを取得
     code = request.form.get("name")
     print(code)
+    print(pl.PLGetter(int(code)))
     print(df)
     # codeで抽出
     df_select = df[df['Code'] == int(code)].sort_values('Announcement_date')
@@ -114,17 +115,16 @@ def pl_post():
     print(type(pl.PLGetter(3679)[0].values.tolist()[0]))
     print(type(pl.PLGetter(3679)[0].tolist()[0]))
 
-    li = map(str, pl.PLGetter(3679)[0].values.tolist())
-    #print(list(li))
-    #xli = list(li)
-    #print(xli)
 
-    #print(type(list(li))[0])
+    li = map(str, pl.PLGetter(3679)[0].values.tolist())
+    yli = pl.PLGetter(int(code))[1].values.tolist()
+
+    print(yli)
 
     #return render_template('pl.html', x=df_select['Announcement_date'].values.tolist()
      #                      , y=df_select['Sales'].values.tolist(), message="銘柄コード："+str(code))
     return render_template('pl.html', x=list(li)
-                          , y=pl.PLGetter(3679)[1].values.tolist(), message="銘柄コード："+str(code))
+                          , y=yli, message="銘柄コード："+str(code))
 
 
 if __name__ == "__main__":
