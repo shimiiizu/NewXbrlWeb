@@ -121,7 +121,7 @@ def sp_on_pl_post():
     # yahoo finance api
     my_share = share.Share(code + ".T")
     symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
-                                          3,
+                                          5,
                                           share.FREQUENCY_TYPE_DAY,
                                           1)
     df = pd.DataFrame({'Date': [datetime.fromtimestamp(d / 1000) for d in symbol_data['timestamp']],

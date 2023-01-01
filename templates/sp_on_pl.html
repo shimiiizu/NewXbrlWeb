@@ -12,9 +12,10 @@
 <body>
 
 <div class="container mt-5">
-  <h1 class="display-4">業績表示サービス</h1>
-        <p class="lead">XBRLデータを使って業績を表示するサービス</p>
+  <h1 class="display-4">株価on業績表示サービス</h1>
+        <p class="lead">XBRLデータとyahoo apiを使って業績グラフ上に株価を表示するサービス</p>
         <hr class="my-4">
+        <h2>{{ cname }}</h2>
         <h3>{{ message }}</h3>
     <form action="sp_on_pl" method="post" enctype="multipart/form-data" class="row g-3">
         <div class="col-auto">
@@ -84,7 +85,7 @@
     var layout = {
 
      yaxis: {title: '業績(億円)'},
-     yaxis2: {title: 'yaxis2 title',
+     yaxis2: {title: '株価',
      overlaying: 'y',
      side: 'right'
     }
@@ -93,10 +94,12 @@
 
     Plotly.newPlot('myDiv', data, layout);
 </script>
+    <p>業績上に株価を表示するところまで成功！</p>
+    <p>凡例が2軸に重なってしまっている箇所を変更</p>
+    <p>グラフの色を換える</p>
+    <p>x軸を数値に変更する</p>
+    <p>軸のfontを変更する</p>
 
-<p>yahoo apiを使って株価を表示するところまで成功！</p>
-<p>基本構造はFREDと同じなので以外とあっさり成功</p>
-    <p>plotlyを現状javascriptとして利用しているものの、pythonで完結することができると思われるので、今後変更を加える予定。</p>
 
 </div>
 </body>
