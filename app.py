@@ -98,34 +98,34 @@ def pl_get():
 def pl_post():
     # formから銘柄コードを取得
     code = request.form.get("name")
-    print(code)
-    print(pl.PLGetter(int(code)))
-    print(df)
+    #print(code)
+    #print(pl.PLGetter(int(code)))
+    #print(df)
     # codeで抽出
     df_select = df[df['Code'] == int(code)].sort_values('Announcement_date')
     #print(df_select['Announcement_date'])
 
-    print(df_select['Announcement_date'].values.tolist())
-    print(pl.PLGetter(3679)[0].values.tolist())
-    print(df_select['Sales'].values.tolist())
-    print(pl.PLGetter(3679)[1].values.tolist())
-    print(len(df_select['Sales'].values.tolist()))
-    print(len(pl.PLGetter(3679)[1].values.tolist()))
-    print(type(df_select['Announcement_date'].values.tolist()[0]))
-    print(type(pl.PLGetter(3679)[0].values.tolist()[0]))
-    print(type(pl.PLGetter(3679)[0].tolist()[0]))
+    #print(df_select['Announcement_date'].values.tolist())
+    #print(pl.PLGetter(3679)[0].values.tolist())
+    #print(df_select['Sales'].values.tolist())
+    #print(pl.PLGetter(3679)[1].values.tolist())
+    #print(len(df_select['Sales'].values.tolist()))
+    #print(len(pl.PLGetter(3679)[1].values.tolist()))
+    #print(type(df_select['Announcement_date'].values.tolist()[0]))
+    #print(type(pl.PLGetter(3679)[0].values.tolist()[0]))
+    #print(type(pl.PLGetter(3679)[0].tolist()[0]))
 
 
-    li = map(str, pl.PLGetter(3679)[0].values.tolist())
-    yli = pl.PLGetter(int(code))[1].values.tolist()
+    xlist = list(map(str, pl.PLGetter(3679)[0].values.tolist())) # リストを文字列に変換
+    ylist = pl.PLGetter(int(code))[1].values.tolist()
 
     #print(type(list(li)[0]))
-    print(type(yli[0]))
+    #print(type(yli[0]))
 
     #return render_template('pl.html', x=df_select['Announcement_date'].values.tolist()
      #                      , y=df_select['Sales'].values.tolist(), message="銘柄コード："+str(code))
-    return render_template('pl.html', x=list(li)
-                          , y=yli, message="銘柄コード："+str(code))
+    return render_template('pl.html', x=list(xlist)
+                          , y=ylist, message="銘柄コード："+str(code))
 
 
 if __name__ == "__main__":
