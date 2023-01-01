@@ -10,11 +10,6 @@ import sqlite3
 import PLGetter as pl
 import plotly.graph_objects as go
 
-
-
-
-
-
 app = Flask(__name__)
 
 # DBの指定
@@ -85,25 +80,22 @@ def post():
                        'Open': symbol_data['open'], 'High': symbol_data['high'], 'Low': symbol_data['low'],
                        'Close': symbol_data['close'], 'Volume': symbol_data['volume']}).set_index('Date')
 
-    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(), message="銘柄コード："+str(code))
+    return render_template('stockpricechart.html', x=df.index.to_list(), y=df['Close'].to_list(),
+                           message="銘柄コード：" + str(code))
 
 
 # -----------------業績表示サービス-----------------
 @app.route('/pl', methods=['GET'])
 def pl_get():
-    return render_template('pl.html',  message="銘柄コードを入力してください。")
+    return render_template('pl.html', message="銘柄コードを入力してください。")
 
 
 @app.route('/pl', methods=['POST'])
 def pl_post():
-    # formから銘柄コードを取得
-    code = request.form.get("name")
-
-    xlist = list(map(str, pl.PLGetter(3679)[0].values.tolist())) # リストを文字列に変換
+    code = request.form.get("name")  # formから銘柄コードを取得
+    xlist = list(map(str, pl.PLGetter(3679)[0].values.tolist()))  # リストを文字列に変換
     ylist = pl.PLGetter(int(code))[1].values.tolist()
-
-    return render_template('pl.html', x=list(xlist)
-                          , y=ylist, message="銘柄コード："+str(code))
+    return render_template('pl.html', x=xlist, y=ylist, message="銘柄コード：" + str(code))
 
 
 if __name__ == "__main__":
