@@ -7,6 +7,11 @@ from yahoo_finance_api2.exceptions import YahooFinanceError
 from datetime import date, datetime
 import pandas as pd
 import sqlite3
+import PLGetter as pl
+import plotly.graph_objects as go
+
+
+
 
 app = Flask(__name__)
 
@@ -97,6 +102,7 @@ def pl_post():
     df_select = df[df['Code'] == int(code)].sort_values('Announcement_date')
     print(df_select['Announcement_date'])
     print(df_select['Sales'])
+    print(pl.PLGetter(3679)[0])
     return render_template('pl.html', x=df_select['Announcement_date'].values.tolist()
                            , y=df_select['Sales'].values.tolist(), message="銘柄コード："+str(code))
 
