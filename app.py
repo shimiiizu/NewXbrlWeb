@@ -93,9 +93,12 @@ def pl_get():
 @app.route('/pl', methods=['POST'])
 def pl_post():
     code = request.form.get("name")  # formから銘柄コードを取得
-    xlist = list(map(str, pl.PLGetter(3679)[0].values.tolist()))  # リストを文字列に変換
-    ylist = pl.PLGetter(int(code))[1].values.tolist()
-    return render_template('pl.html', x=xlist, y=ylist, message="銘柄コード：" + str(code))
+    timelist = list(map(str, pl.PLGetter(3679)[0].values.tolist()))  # リストを文字列に変換
+    Saleslist = pl.PLGetter(int(code))[1].values.tolist()
+    OperatingIncomelist = pl.PLGetter(int(code))[2].values.tolist()
+    textlist = pl.PLGetter(int(code))[3].values.tolist()
+
+    return render_template('pl.html', x=timelist, y1=Saleslist, y2=OperatingIncomelist, text=textlist, message="銘柄コード：" + str(code))
 
 
 if __name__ == "__main__":

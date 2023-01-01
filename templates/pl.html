@@ -41,12 +41,31 @@
         x:[{% for item in x %}　
        '{{item}}',
         {% endfor %}],
-        y:[{% for item in y %}　
+        y:[{% for item in y1 %}　
        {{item}},
         {% endfor %}],
+        name: '売上',
         type: 'bar',
+        text: [{% for item in text %}　
+       '{{item}}',
+        {% endfor %}],
     };
-    var data = [trace1];
+
+     var trace2 = {
+        x:[{% for item in x %}　
+       '{{item}}',
+        {% endfor %}],
+        y:[{% for item in y2 %}　
+       {{item}},
+        {% endfor %}],
+        name: '営業利益',
+        type: 'bar',
+        text: [{% for item in text %}　
+       '{{item}}',
+        {% endfor %}],
+    };
+
+    var data = [trace1, trace2];
 
     var selectorOptions = {
     };
