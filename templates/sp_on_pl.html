@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>XBRL DB</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+<div class="container mt-5">
+  <h1 class="display-4">業績表示サービス</h1>
+        <p class="lead">XBRLデータを使って業績を表示するサービス</p>
+        <hr class="my-4">
+        <h3>{{ message }}</h3>
+    <form action="pl" method="post" enctype="multipart/form-data" class="row g-3">
+        <div class="col-auto">
+            <input type="text" class="form-control" name="name" placeholder="ここに入力">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">グラフ表示</button>
+        </div>
+    </form>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a href="/" class="nav-link active">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link">contact</a>
+        </li>
+    </ul>
+
+<div id="myDiv"><!-- ここにグラフを表示する --></div>
+
+<script type="text/javascript">
+    var trace1 = {
+        x:[{% for item in x %}　
+       '{{item}}',
+        {% endfor %}],
+        y:[{% for item in y1 %}　
+       {{item}},
+        {% endfor %}],
+        name: '売上',
+        type: 'bar',
+        text: [{% for item in text %}　
+       '{{item}}',
+        {% endfor %}],
+    };
+
+     var trace2 = {
+        x:[{% for item in x %}　
+       '{{item}}',
+        {% endfor %}],
+        y:[{% for item in y2 %}　
+       {{item}},
+        {% endfor %}],
+        name: '営業利益',
+        type: 'bar',
+        text: [{% for item in text %}　
+       '{{item}}',
+        {% endfor %}],
+    };
+
+    var data = [trace1, trace2];
+
+    var selectorOptions = {
+    };
+
+    var layout = {
+    };
+
+    Plotly.newPlot('myDiv', data, layout);
+</script>
+
+<p>yahoo apiを使って株価を表示するところまで成功！</p>
+<p>基本構造はFREDと同じなので以外とあっさり成功</p>
+    <p>plotlyを現状javascriptとして利用しているものの、pythonで完結することができると思われるので、今後変更を加える予定。</p>
+
+</div>
+</body>
