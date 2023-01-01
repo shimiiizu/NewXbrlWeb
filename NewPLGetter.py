@@ -63,8 +63,11 @@ def PLGetter(code):
 
     plot = [d0, d1]
     fig = go.Figure(data=plot)
-    fig.show()
+    fig.write_html("./templates/NewPLGetterGraph.html")
 
+    #graph = NewPLGetterGraph.html
+    #fig.show()
+    #return graph
     #return xlist, y1list, y2list, label
 
 

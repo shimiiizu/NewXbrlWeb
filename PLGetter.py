@@ -40,7 +40,8 @@ def PLGetter(code):
                 i + 1, 'OperatingIncome'] * cof
             df_select.loc[i, 'Announcement_date_quarter'] = df_select.loc[i, 'Announcement_date']
 
-    xlist = pd.to_datetime(df_select['Announcement_date_quarter'])
+    #xlist = pd.to_datetime(df_select['Announcement_date_quarter'])
+    xlist = df_select['Announcement_date_quarter']
     y1list = df_select['Sales_quarter']
     y2list = df_select['OperatingIncome_quarter']
     label = df_select['Quarter']

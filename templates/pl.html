@@ -10,10 +10,13 @@
 </head>
 
 <body>
+
 <div class="container mt-5">
   <h1 class="display-4">業績表示サービス</h1>
         <p class="lead">XBRLデータを使って業績を表示するサービス</p>
         <hr class="my-4">
+        <h2>{{ x }}</h2>
+        <h2>{{ y }}</h2>
         <h3>{{ message }}</h3>
     <form action="pl" method="post" enctype="multipart/form-data" class="row g-3">
         <div class="col-auto">
@@ -35,7 +38,7 @@
 
 <div id="myDiv"><!-- ここにグラフを表示する --></div>
 
-<script>
+<script type="text/javascript">
     var trace1 = {
         x:[{% for item in x %}　
        '{{item}}',

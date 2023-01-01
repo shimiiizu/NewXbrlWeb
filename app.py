@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import fredapi as fa
@@ -9,6 +9,8 @@ import pandas as pd
 import sqlite3
 import PLGetter as pl
 import plotly.graph_objects as go
+
+
 
 
 
@@ -100,11 +102,29 @@ def pl_post():
     print(df)
     # codeで抽出
     df_select = df[df['Code'] == int(code)].sort_values('Announcement_date')
-    print(df_select['Announcement_date'])
-    print(df_select['Sales'])
-    print(pl.PLGetter(3679)[0])
-    return render_template('pl.html', x=df_select['Announcement_date'].values.tolist()
-                           , y=df_select['Sales'].values.tolist(), message="銘柄コード："+str(code))
+    #print(df_select['Announcement_date'])
+
+    print(df_select['Announcement_date'].values.tolist())
+    print(pl.PLGetter(3679)[0].values.tolist())
+    print(df_select['Sales'].values.tolist())
+    print(pl.PLGetter(3679)[1].values.tolist())
+    print(len(df_select['Sales'].values.tolist()))
+    print(len(pl.PLGetter(3679)[1].values.tolist()))
+    print(type(df_select['Announcement_date'].values.tolist()[0]))
+    print(type(pl.PLGetter(3679)[0].values.tolist()[0]))
+    print(type(pl.PLGetter(3679)[0].tolist()[0]))
+
+    li = map(str, pl.PLGetter(3679)[0].values.tolist())
+    #print(list(li))
+    #xli = list(li)
+    #print(xli)
+
+    #print(type(list(li))[0])
+
+    #return render_template('pl.html', x=df_select['Announcement_date'].values.tolist()
+     #                      , y=df_select['Sales'].values.tolist(), message="銘柄コード："+str(code))
+    return render_template('pl.html', x=list(li)
+                          , y=pl.PLGetter(3679)[1].values.tolist(), message="銘柄コード："+str(code))
 
 
 if __name__ == "__main__":
