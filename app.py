@@ -119,7 +119,8 @@ def pl_post():
     li = map(str, pl.PLGetter(3679)[0].values.tolist())
     yli = pl.PLGetter(int(code))[1].values.tolist()
 
-    print(yli)
+    #print(type(list(li)[0]))
+    print(type(yli[0]))
 
     #return render_template('pl.html', x=df_select['Announcement_date'].values.tolist()
      #                      , y=df_select['Sales'].values.tolist(), message="銘柄コード："+str(code))
