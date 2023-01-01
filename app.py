@@ -97,8 +97,9 @@ def pl_post():
     Saleslist = pl.PLGetter(int(code))[1].values.tolist()
     OperatingIncomelist = pl.PLGetter(int(code))[2].values.tolist()
     textlist = pl.PLGetter(int(code))[3].values.tolist()
-
-    return render_template('pl.html', x=timelist, y1=Saleslist, y2=OperatingIncomelist, text=textlist, message="銘柄コード：" + str(code))
+    cname = pl.PLGetter(int(code))[4].values.tolist()[0]
+    return render_template('pl.html', x=timelist, y1=Saleslist, y2=OperatingIncomelist,
+                           cname=cname, text=textlist, message="銘柄コード：" + str(code))
 
 
 if __name__ == "__main__":

@@ -60,12 +60,14 @@ def PLGetter(code):
     y1list = df['Sales_quarter']
     y2list = df['OperatingIncome_quarter']
     label = df['Quarter']
+    cname = df['CompanyName']
 
     print(df)
     print(len(xlist))
     print(len(label))
+    print(cname)
 
-    return xlist, y1list, y2list, label
+    return xlist, y1list, y2list, label, cname
 
 
 if __name__ == "__main__":
