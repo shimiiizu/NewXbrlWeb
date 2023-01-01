@@ -101,6 +101,37 @@ def pl_post():
     return render_template('pl.html', x=timelist, y1=Saleslist, y2=OperatingIncomelist,
                            cname=cname, text=textlist, message="銘柄コード：" + str(code))
 
+# -----------------株価on業績表示サービス-----------------
+@app.route('/sp_on_pl', methods=['GET'])
+def sp_on_pl_get():
+    return render_template('sp_on_pl.html', message="銘柄コードを入力してください。")
+
+
+@app.route('/sp_on_pl', methods=['POST'])
+def sp_on_pl_post():
+    code = request.form.get("name")  # formから銘柄コードを取得
+
+    # PL
+    timelist = list(map(str, pl.PLGetter(3679)[0].values.tolist()))  # リストを文字列に変換
+    Saleslist = pl.PLGetter(int(code))[1].values.tolist()
+    OperatingIncomelist = pl.PLGetter(int(code))[2].values.tolist()
+    textlist = pl.PLGetter(int(code))[3].values.tolist()
+    cname = pl.PLGetter(int(code))[4].values.tolist()[0]
+
+    # yahoo finance api
+    my_share = share.Share(code + ".T")
+    symbol_data = my_share.get_historical(share.PERIOD_TYPE_YEAR,
+                                          3,
+                                          share.FREQUENCY_TYPE_DAY,
+                                          1)
+    df = pd.DataFrame({'Date': [datetime.fromtimestamp(d / 1000) for d in symbol_data['timestamp']],
+                       'Open': symbol_data['open'], 'High': symbol_data['high'], 'Low': symbol_data['low'],
+                       'Close': symbol_data['close'], 'Volume': symbol_data['volume']}).set_index('Date')
+
+    return render_template('sp_on_pl.html', x=timelist, x_sp=df.index.to_list(),
+                           y1=Saleslist, y2=OperatingIncomelist, y_sp=df['Close'].to_list(),
+                           cname=cname, text=textlist, message="銘柄コード：" + str(code))
+
 
 if __name__ == "__main__":
     app.run(debug=True)

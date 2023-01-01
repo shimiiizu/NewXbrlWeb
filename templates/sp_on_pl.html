@@ -16,7 +16,7 @@
         <p class="lead">XBRLデータを使って業績を表示するサービス</p>
         <hr class="my-4">
         <h3>{{ message }}</h3>
-    <form action="pl" method="post" enctype="multipart/form-data" class="row g-3">
+    <form action="sp_on_pl" method="post" enctype="multipart/form-data" class="row g-3">
         <div class="col-auto">
             <input type="text" class="form-control" name="name" placeholder="ここに入力">
         </div>
@@ -24,7 +24,6 @@
             <button type="submit" class="btn btn-primary mb-3">グラフ表示</button>
         </div>
     </form>
-
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a href="/" class="nav-link active">Home</a>
@@ -65,12 +64,31 @@
         {% endfor %}],
     };
 
-    var data = [trace1, trace2];
+      var trace3 = {
+        x:[{% for item in x_sp %}　
+       '{{item}}',
+        {% endfor %}],
+        y:[{% for item in y_sp %}　
+       {{item}},
+        {% endfor %}],
+        name: '株価',
+        yaxis: 'y2',
+        type: 'scatter',
+    };
+
+    var data = [trace1, trace2, trace3];
 
     var selectorOptions = {
     };
 
     var layout = {
+
+     yaxis: {title: '業績(億円)'},
+     yaxis2: {title: 'yaxis2 title',
+     overlaying: 'y',
+     side: 'right'
+    }
+
     };
 
     Plotly.newPlot('myDiv', data, layout);

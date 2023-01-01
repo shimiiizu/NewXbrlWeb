@@ -62,18 +62,18 @@ def PLGetter(code):
     label = df['Quarter']
     cname = df['CompanyName']
 
-    print(df)
-    print(len(xlist))
-    print(len(label))
-    print(cname)
+    # print(df)
+    # print(len(xlist))
+    # print(len(label))
+    # print(cname)
 
     return xlist, y1list, y2list, label, cname
 
 
 if __name__ == "__main__":
     print(PLGetter(3679)[0])
-    #print(PLGetter(3679)[1])
-    #print(PLGetter(3679)[2])
+    # print(PLGetter(3679)[1])
+    # print(PLGetter(3679)[2])
 
     """
     d0 = go.Scatter(
