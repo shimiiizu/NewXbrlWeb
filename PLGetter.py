@@ -40,18 +40,36 @@ def PLGetter(code):
                 i + 1, 'OperatingIncome'] * cof
             df_select.loc[i, 'Announcement_date_quarter'] = df_select.loc[i, 'Announcement_date']
 
+<<<<<<< HEAD
     xlist = pd.to_datetime(df_select['Announcement_date_quarter'])
     y1list = df_select['Sales_quarter']
     y2list = df_select['OperatingIncome_quarter']
     label = df_select['Quarter']
 
     return xlist, y1list, y2list, label
+=======
+    # 欠損値処理
+    df = df_select.dropna(subset=["Announcement_date_quarter", "Sales_quarter"])
+
+    xlist = df['Announcement_date_quarter']
+    y1list = df['Sales_quarter']
+    y2list = df['OperatingIncome_quarter']
+    label = df['Quarter']
+    cname = df['CompanyName']
+
+    return xlist, y1list, y2list, label, cname
+>>>>>>> origin/main
 
 
 if __name__ == "__main__":
     print(PLGetter(3679)[0])
+<<<<<<< HEAD
     print(PLGetter(3679)[1])
     print(PLGetter(3679)[2])
+=======
+    # print(PLGetter(3679)[1])
+    # print(PLGetter(3679)[2])
+>>>>>>> origin/main
 
     """
     d0 = go.Scatter(
